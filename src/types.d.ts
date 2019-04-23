@@ -10,6 +10,12 @@ export interface Invite {
   approved_at: Date;
   email_address: string;
   full_name: string;
-  github_username: string;
+  github_username?: string;
   requested_at: Date;
+}
+
+export interface InviteRequest {
+  email_address: string;
+  full_name: string;
+  github_username?: string;
 }
