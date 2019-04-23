@@ -1,15 +1,19 @@
 <template>
-  <Login/>
+  <div class='admin-login'>
+    <Login />
+  </div>
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 import { Route } from 'vue-router';
 import Login from '../components/Login.vue';
 
-@Component({
+export default Vue.extend({
+  name: 'AdminLogin',
+
   beforeRouteEnter(to: Route, from: Route, next: any) {
-    next((context: AdminLogin) => {
+    next((context: any) => {
       if (context.$store.getters.isAuthenticated) {
         next(false);
         context.$router.push({ name: 'admin-index' });
@@ -22,7 +26,5 @@ import Login from '../components/Login.vue';
   components: {
     Login
   }
-})
-
-export default class AdminLogin extends Vue {}
+});
 </script>

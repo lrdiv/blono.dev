@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='admin-index'>
     <div v-for="invite in invites" :key="invite.id">
       <div>
         {{ invite.full_name }} - {{ invite.email_address }}
@@ -10,33 +10,37 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 import { Route } from 'vue-router';
 import { Invite } from '../types';
 
-@Component({
+export default Vue.extend({
+  name: 'AdminIndex',
+
   beforeRouteEnter(to: Route, from: Route, next: any) {
-    next((context: AdminIndex) => {
+    next((context: any) => {
       if (!context.$store.getters.isAuthenticated) {
         next(false);
         return context.$router.push({ name: 'admin-login' });
       }
       return next();
     });
-  }
-})
+  },
 
-export default class AdminIndex extends Vue {
-  public mounted() {
+  mounted() {
     this.$store.dispatch('inviteList');
-  }
+  },
 
-  public approveInvite(invite: Invite) {
-    this.$store.dispatch('approveInvite', invite);
-  }
+  computed: {
+    invites(): Invite[] {
+      return this.$store.getters.sortedInvites;
+    }
+  },
 
-  get invites() {
-    return this.$store.getters.sortedInvites;
+  methods: {
+    approveInvite(invite: Invite): void {
+      this.$store.dispatch('approveInvite', invite);
+    }
   }
-}
+});
 </script>

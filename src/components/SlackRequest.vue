@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <template v-if="alreadyRequested">
+  <div class='slack-request-component'>
+    <div v-if="alreadyRequested">
       <p>We've received your request and will send you an invite as soon as we can!</p>
       <p>In the meantime, check us out on <a href="https://meetup.com/blonodevs" target="_blank">Meetup.com</a></p>
-    </template>
-    <template v-else>
+    </div>
+    <div v-else>
       <form @submit.prevent="onSubmit">
         <div class="field">
           <div class="control">
@@ -23,7 +23,7 @@
         </div>
         <button class="button is-link is-pulled-right" type="submit">Submit</button>
       </form>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -34,25 +34,35 @@
 </style>
 
 <script lang="ts">
-import { Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 
-export default class SlackRequest extends Vue {
-  public emailAddress: string = '';
-  public fullName: string = '';
-  public githubUsername: string = '';
-  public submitted: boolean = false;
+export default Vue.extend({
+  name: 'SlackRequest',
 
-  get alreadyRequested() {
-    return this.$store.state.invites.requestedInvite;
+  data() {
+    return {
+      emailAddress: '',
+      fullName: '',
+      githubUsername: '',
+      submitted: false
+    };
+  },
+
+  computed: {
+    alreadyRequested(): boolean {
+      return !!this.$store.state.invites.requestedInvite;
+    }
+  },
+
+  methods: {
+    onSubmit() {
+      const { fullName, emailAddress, githubUsername } = this;
+      this.$store.dispatch('requestInvite', {
+        full_name: fullName,
+        email_address: emailAddress,
+        github_username: githubUsername
+      });
+    }
   }
-
-  public onSubmit() {
-    const { fullName, emailAddress, githubUsername } = this;
-    this.$store.dispatch('requestInvite', {
-      full_name: fullName,
-      email_address: emailAddress,
-      github_username: githubUsername
-    });
-  }
-}
+});
 </script>
