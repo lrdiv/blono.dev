@@ -1,7 +1,7 @@
 <template>
   <div class='home container'>
     <div class='columns'>
-      <div class='column'>
+      <div class='column is-one-third'>
         <h1>Blo<br>No<br>Devs</h1>
         <h2>The Bloomington-Normal <br>Software Development Community</h2>
       </div>

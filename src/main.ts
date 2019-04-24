@@ -1,4 +1,7 @@
 import Vue from 'vue';
+import './class-hooks';
+
+// Vendor CSS
 import './../node_modules/bulma/css/bulma.css';
 
 import App from './App.vue';

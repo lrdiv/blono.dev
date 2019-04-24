@@ -36,7 +36,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-@Component({ name: 'SlackRequest '})
+@Component({ name: 'SlackRequest' })
 export default class SlackRequest extends Vue {
   public emailAddress: string = '';
   public fullName: string = '';

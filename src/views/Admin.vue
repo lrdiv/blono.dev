@@ -1,6 +1,8 @@
 <template>
   <div class='admin'>
-    <router-view></router-view>
+    <div class='container'>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -8,9 +10,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-@Component({
-  name: 'Admin'
-})
+@Component({ name: 'Admin' })
 export default class Admin extends Vue {}
 </script>
 
