@@ -55,7 +55,7 @@ export default Vue.extend({
   },
 
   methods: {
-    onSubmit() {
+    onSubmit(): void {
       const { fullName, emailAddress, githubUsername } = this;
       this.$store.dispatch('requestInvite', {
         full_name: fullName,

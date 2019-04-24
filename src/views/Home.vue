@@ -12,7 +12,11 @@
             <MeetupLogo />
           </a>
         </h3>
-        <h3>Join us on Slack</h3>
+        <hr class='title-split'>
+        <h3>
+          Join us on
+          <SlackLogo />
+        </h3>
         <SlackRequest></SlackRequest>
       </div>
     </div>
@@ -36,14 +40,32 @@
     margin-bottom: 24px;
   }
 
+  hr.title-split {
+    margin-bottom: 0;
+  }
+
+  svg {
+    position: relative;
+    width: auto;
+  }
+
   .meetup-logo-component {
     display: inline-block;
 
     svg {
       height: 50px;
-      margin-bottom: -15px;
-      padding-left: 10px;
-      width: auto;
+      left: 10px;
+      top: 15px;
+    }
+  }
+
+  .slack-logo-component {
+    display: inline-block;
+
+    svg {
+      height: 75px;
+      left: -10px;
+      top: 24px;
     }
   }
 </style>
@@ -51,13 +73,14 @@
 <script lang='ts'>
 import Vue from 'vue';
 import MeetupLogo from '../components/MeetupLogo.vue';
+import SlackLogo from '../components/SlackLogo.vue';
 import SlackRequest from '../components/SlackRequest.vue';
-
 export default Vue.extend({
   name: 'Home',
   components: {
-    SlackRequest,
-    MeetupLogo
+    MeetupLogo,
+    SlackLogo,
+    SlackRequest
   }
 });
 </script>
