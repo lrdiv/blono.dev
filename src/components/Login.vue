@@ -10,22 +10,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Component from 'vue-class-component';
 
-export default Vue.extend({
-  data() {
-    return {
-      username: '',
-      password: ''
-    };
-  },
+@Component({})
+export default class Login extends Vue {
+  public username: string = '';
+  public password: string = '';
 
-  methods: {
-    onSubmit() {
-      const { username, password } = this;
-      this.$store.dispatch('login', { username, password })
-        .then(() => this.$nextTick())
-        .then(() => this.$router.push({ name: 'admin-index' }));
-    }
+  public onSubmit(): void {
+    const { username, password } = this;
+    this.$store.dispatch('login', { username, password })
+      .then(() => this.$nextTick())
+      .then(() => this.$router.push({ name: 'admin-index' }));
   }
-});
+}
 </script>

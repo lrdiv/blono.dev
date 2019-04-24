@@ -11,13 +11,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Component from 'vue-class-component';
 import { Route } from 'vue-router';
 import { Invite } from '../types';
 
-export default Vue.extend({
-  name: 'AdminIndex',
-
-  beforeRouteEnter(to: Route, from: Route, next: any) {
+@Component({ name: 'AdminIndex' })
+export default class AdminIndex extends Vue {
+  public beforeRouteEnter(to: Route, from: Route, next: any) {
     next((context: any) => {
       if (!context.$store.getters.isAuthenticated) {
         next(false);
@@ -25,22 +25,18 @@ export default Vue.extend({
       }
       return next();
     });
-  },
-
-  mounted() {
-    this.$store.dispatch('inviteList');
-  },
-
-  computed: {
-    invites(): Invite[] {
-      return this.$store.getters.sortedInvites;
-    }
-  },
-
-  methods: {
-    approveInvite(invite: Invite): void {
-      this.$store.dispatch('approveInvite', invite);
-    }
   }
-});
+
+  public mounted(): void {
+    this.$store.dispatch('inviteList');
+  }
+
+  get invites(): Invite[] {
+      return this.$store.getters.sortedInvites;
+  }
+
+  public approveInvite(invite: Invite): void {
+    this.$store.dispatch('approveInvite', invite);
+  }
+}
 </script>

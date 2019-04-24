@@ -34,40 +34,32 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Component from 'vue-class-component';
 
-export default Vue.extend({
-  name: 'SlackRequest',
+@Component({ name: 'SlackRequest '})
+export default class SlackRequest extends Vue {
+  public emailAddress: string = '';
+  public fullName: string = '';
+  public githubUsername: string = '';
+  public isSubmitting: boolean = false;
+  public submitted: boolean = false;
 
-  data() {
-    return {
-      emailAddress: '',
-      fullName: '',
-      githubUsername: '',
-      isSubmitting: false,
-      submitted: false
-    };
-  },
-
-  computed: {
-    alreadyRequested(): boolean {
-      return !!this.$store.state.invites.requestedInvite;
-    }
-  },
-
-  methods: {
-    onSubmit(): void {
-      this.isSubmitting = true;
-
-      const { fullName, emailAddress, githubUsername } = this;
-      const data = {
-        full_name: fullName,
-        email_address: emailAddress,
-        github_username: githubUsername
-      };
-
-      this.$store.dispatch('requestInvite', data)
-        .then(() => this.isSubmitting = false);
-    }
+  get alreadyRequested(): boolean {
+    return !!this.$store.state.invites.requestedInvite;
   }
-});
+
+  public onSubmit(): void {
+    this.isSubmitting = true;
+
+    const { fullName, emailAddress, githubUsername } = this;
+    const data = {
+      full_name: fullName,
+      email_address: emailAddress,
+      github_username: githubUsername
+    };
+
+    this.$store.dispatch('requestInvite', data)
+      .then(() => this.isSubmitting = false);
+  }
+}
 </script>

@@ -18,7 +18,7 @@
           Join us on
           <SlackLogo />
         </h3>
-        <SlackRequest></SlackRequest>
+        <SlackRequest />
       </div>
     </div>
   </div>
@@ -73,15 +73,19 @@
 
 <script lang='ts'>
 import Vue from 'vue';
+import Component from 'vue-class-component';
+
 import MeetupLogo from '../components/MeetupLogo.vue';
 import SlackLogo from '../components/SlackLogo.vue';
 import SlackRequest from '../components/SlackRequest.vue';
-export default Vue.extend({
+
+@Component({
   name: 'Home',
   components: {
     MeetupLogo,
     SlackLogo,
     SlackRequest
   }
-});
+})
+export default class Home extends Vue {}
 </script>

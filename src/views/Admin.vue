@@ -6,9 +6,11 @@
 
 <script lang='ts'>
 import Vue from 'vue';
+import Component from 'vue-class-component';
 
-export default Vue.extend({
+@Component({
   name: 'Admin'
-});
+})
+export default class Admin extends Vue {}
 </script>
 

@@ -6,13 +6,17 @@
 
 <script lang='ts'>
 import Vue from 'vue';
+import Component from 'vue-class-component';
 import { Route } from 'vue-router';
+
 import Login from '../components/Login.vue';
 
-export default Vue.extend({
+@Component({
   name: 'AdminLogin',
-
-  beforeRouteEnter(to: Route, from: Route, next: any) {
+  components: { Login }
+})
+export default class AdminLogin extends Vue {
+  public beforeRouteEnter(to: Route, from: Route, next: any) {
     next((context: any) => {
       if (context.$store.getters.isAuthenticated) {
         next(false);
@@ -21,10 +25,6 @@ export default Vue.extend({
         next();
       }
     });
-  },
-
-  components: {
-    Login
   }
-});
+}
 </script>
