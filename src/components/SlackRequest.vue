@@ -2,7 +2,6 @@
   <div class='slack-request-component'>
     <div v-if="alreadyRequested">
       <p>We've received your request and will send you an invite as soon as we can!</p>
-      <p>In the meantime, check us out on <a href="https://meetup.com/blonodevs" target="_blank">Meetup.com</a></p>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
@@ -21,7 +20,7 @@
             <input v-model="githubUsername" class="input is-rounded" type="text" placeholder="Github Username (Optional)" />
           </div>
         </div>
-        <button class="button is-link is-pulled-right" type="submit">Submit</button>
+        <button class="button is-link is-pulled-right" :class="{ 'is-loading': isSubmitting }" type="submit">Submit</button>
       </form>
     </div>
   </div>
@@ -44,6 +43,7 @@ export default Vue.extend({
       emailAddress: '',
       fullName: '',
       githubUsername: '',
+      isSubmitting: false,
       submitted: false
     };
   },
@@ -56,12 +56,17 @@ export default Vue.extend({
 
   methods: {
     onSubmit(): void {
+      this.isSubmitting = true;
+
       const { fullName, emailAddress, githubUsername } = this;
-      this.$store.dispatch('requestInvite', {
+      const data = {
         full_name: fullName,
         email_address: emailAddress,
         github_username: githubUsername
-      });
+      };
+
+      this.$store.dispatch('requestInvite', data)
+        .then(() => this.isSubmitting = false);
     }
   }
 });
