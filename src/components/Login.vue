@@ -20,10 +20,8 @@ export default class Login extends Vue {
     const { username, password } = this;
     return this.$store.dispatch('login', { username, password })
       .then((token) => {
-        setTimeout(() => {
-          this.$store.commit('storeToken', token);
-          this.$router.push({ name: 'admin-index' });
-        }, 500);
+        this.$store.commit('storeToken', token);
+        this.$router.push({ name: 'admin-index' });
       });
   }
 }
