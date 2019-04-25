@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     axios(state, getters): AxiosInstance {
       const instance = axios.create();
       if (getters.isAuthenticated) {
-        instance.defaults.headers.common.Authorization = `Token ${getters.authToken}`;
+        // @ts-ignore https://github.com/vuejs/vuex/pull/1121
+        instance.defaults.headers.common.Authorization = `Token ${state.auth.authToken}`;
       }
       return instance;
     }

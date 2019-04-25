@@ -51,17 +51,13 @@ import { Invite } from '../types';
 export default class AdminIndex extends Vue {
   public allShown: boolean = false;
 
-  public beforeRouteEnter(to: Route, from: Route, next: any) {
-    next((context: any) => {
-      if (!context.$store.getters.isAuthenticated) {
-        next(false);
-        return context.$router.push({ name: 'admin-login' });
-      }
-      return next();
-    });
-  }
-
   public mounted(): void {
+    this.$store.commit('loadAuthToken');
+
+    if (!this.$store.getters.isAuthenticated) {
+      return this.$router.push({ name: 'admin-login' });
+    }
+
     this.$store.dispatch('inviteList');
   }
 

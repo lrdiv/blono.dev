@@ -20,7 +20,7 @@ export default class InvitesModule extends VuexModule {
         url += '?approved=true';
       }
 
-      this.context.getters.axios.get(url)
+      return this.context.getters.axios.get(url)
         .then((resp: AxiosResponse) => resolve(resp.data))
         .catch(reject);
     });

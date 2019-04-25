@@ -16,15 +16,12 @@ import Login from '../components/Login.vue';
   components: { Login }
 })
 export default class AdminLogin extends Vue {
-  public beforeRouteEnter(to: Route, from: Route, next: any) {
-    next((context: any) => {
-      if (context.$store.getters.isAuthenticated) {
-        next(false);
-        context.$router.push({ name: 'admin-index' });
-      } else {
-        next();
-      }
-    });
+  public mounted(): void {
+    this.$store.commit('loadAuthToken');
+
+    if (this.$store.getters.isAuthenticated) {
+      this.$router.push({ name: 'admin-index' });
+    }
   }
 }
 </script>

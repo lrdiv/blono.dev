@@ -9,19 +9,22 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
 @Component({ name: 'Login' })
 export default class Login extends Vue {
   public username: string = '';
   public password: string = '';
 
-  public onSubmit(): void {
+  public onSubmit(): Promise<void> {
     const { username, password } = this;
-    this.$store.dispatch('login', { username, password })
-      .then(() => this.$nextTick())
-      .then(() => this.$router.push({ name: 'admin-index' }));
+    return this.$store.dispatch('login', { username, password })
+      .then((token) => {
+        setTimeout(() => {
+          this.$store.commit('storeToken', token);
+          this.$router.push({ name: 'admin-index' });
+        }, 500);
+      });
   }
 }
 </script>
