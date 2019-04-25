@@ -1,5 +1,6 @@
 <template>
   <div class='admin-login'>
+    <h3 class="is-size-3">Login</h3>
     <Login />
   </div>
 </template>

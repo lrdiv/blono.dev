@@ -4,7 +4,7 @@
       <span v-if="allShown">Show Pending</span>
       <span v-else>Show Approved</span>
     </button>
-    <h2 class="title">Requests</h2>
+    <h3 class="is-size-3">Requests</h3>
     <table class="table is-fullwidth is-bordered">
       <thead>
         <tr>
