@@ -20,7 +20,7 @@
           </a>
         </h3>
         <p>
-          We meet at The Coffeehouse &amp; Deli in Uptown Normal on the first Tuesday of every month. To stay updated, join our group on
+          We meet at The Coffeehouse &amp; Deli in Uptown Normal on the first Tuesday of every month from 6-8pm. To stay updated, join our group on
           <a href="https://meetup.com/blonodevs" target="_blank">Meetup.com</a>
         </p>
         <hr class="title-split">
