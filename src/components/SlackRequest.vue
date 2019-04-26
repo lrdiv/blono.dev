@@ -4,7 +4,7 @@
       <p>We've received your request and will send you an invite as soon as we can!</p>
     </div>
     <div v-else>
-      <div v-if="submissionError.length"><span class="danger">{{ submissionError }}</span></div>
+      <div v-if="submissionError"><span class="danger">{{ submissionError }}</span></div>
       <form @submit.prevent="onSubmit">
         <div class="field">
           <div class="control">
@@ -66,6 +66,7 @@ export default Vue.extend({
   methods: {
     onSubmit(): void {
       this.isSubmitting = true;
+      this.submissionError = null;
       const { fullName, emailAddress, githubUsername } = this;
 
       if (!fullName.length || !emailAddress.length || !githubUsername.length) {
