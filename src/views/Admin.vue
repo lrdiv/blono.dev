@@ -8,10 +8,7 @@
 </template>
 
 <script lang='ts'>
-import Vue from 'vue';
-import Component from 'vue-class-component';
-
-@Component({ name: 'Admin' })
-export default class Admin extends Vue {}
+import Vue from "vue";
+export default Vue.extend({ name: "Admin" });
 </script>
 

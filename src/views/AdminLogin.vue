@@ -1,28 +1,25 @@
 <template>
-  <div class='admin-login'>
+  <div class="admin-login">
     <h3 class="is-size-3">Login</h3>
-    <Login />
+    <Login/>
   </div>
 </template>
 
 <script lang='ts'>
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Route } from 'vue-router';
+import Vue from "vue";
+import { Route } from "vue-router";
 
-import Login from '../components/Login.vue';
+import Login from "../components/Login.vue";
 
-@Component({
-  name: 'AdminLogin',
-  components: { Login }
-})
-export default class AdminLogin extends Vue {
-  public mounted(): void {
-    this.$store.commit('loadAuthToken');
+export default Vue.extend({
+  name: "AdminLogin",
+  components: { Login },
 
+  mounted(): void {
+    this.$store.commit("loadAuthToken");
     if (this.$store.getters.isAuthenticated) {
-      this.$router.push({ name: 'admin-index' });
+      this.$router.push({ name: "admin-index" });
     }
   }
-}
+});
 </script>

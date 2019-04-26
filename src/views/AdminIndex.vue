@@ -34,45 +34,51 @@
 </template>
 
 <script lang="ts">
-import moment from 'moment';
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { Route } from 'vue-router';
-import { Invite } from '../types';
+import moment from "moment";
+import Vue from "vue";
+import { Route } from "vue-router";
+import { Invite } from "../types";
 
-@Component({
-  name: 'AdminIndex',
+export default Vue.extend({
+  name: "AdminIndex",
+
+  data() {
+    return {
+      allShown: false as boolean
+    }
+  },
+
   filters: {
-    prettyDate(val: Date): string {
+    prettyDate(val: number): string {
       return moment(val).fromNow();
     }
-  }
-})
-export default class AdminIndex extends Vue {
-  public allShown: boolean = false;
+  },
 
-  public mounted(): void {
-    this.$store.commit('loadAuthToken');
+  computed: {
+    invites(): Invite[] {
+      return this.$store.getters.sortedInvites;
+    }
+  },
 
+  methods: {
+    approveInvite(invite: Invite): void {
+      this.$store.dispatch("approveInvite", invite);
+    },
+
+    toggleAllShown(): void {
+      const notShown: boolean = !this.allShown;
+      this.allShown = notShown;
+      this.$store.dispatch("inviteList", notShown);
+    }
+  },
+
+  mounted(): void {
+    this.$store.commit("loadAuthToken");
     if (!this.$store.getters.isAuthenticated) {
-      return this.$router.push({ name: 'admin-login' });
+      return this.$router.push({ name: "admin-login" });
     }
 
-    this.$store.dispatch('inviteList');
+    this.$store.dispatch("inviteList");
   }
-
-  get invites(): Invite[] {
-      return this.$store.getters.sortedInvites;
-  }
-
-  public approveInvite(invite: Invite): void {
-    this.$store.dispatch('approveInvite', invite);
-  }
-
-  public toggleAllShown(): void {
-    const notShown: boolean = !this.allShown;
-    this.allShown = notShown;
-    this.$store.dispatch('inviteList', notShown);
-  }
-}
+});
 </script>

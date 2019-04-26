@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
-import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Invite, InviteRequest } from '../types';
+import { AxiosResponse } from "axios";
+import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
+import { Invite, InviteRequest } from "../types";
 
 @Module
 export default class InvitesModule extends VuexModule {
@@ -11,13 +11,13 @@ export default class InvitesModule extends VuexModule {
     return this.invites.sort((a: Invite, b: Invite) => a.requested_at < b.requested_at ? 1 : -1);
   }
 
-  @Action({ commit: 'setInvites' })
+  @Action({ commit: "setInvites" })
   public inviteList(approved: boolean = false): Promise<void> {
     return new Promise((resolve, reject) => {
       let url: string = `${process.env.VUE_APP_API_HOST}/api/admin-invites`;
 
       if (approved) {
-        url += '?approved=true';
+        url += "?approved=true";
       }
 
       return this.context.getters.axios.get(url)
@@ -26,7 +26,7 @@ export default class InvitesModule extends VuexModule {
     });
   }
 
-  @Action({ commit: 'updateInvite' })
+  @Action({ commit: "updateInvite" })
   public approveInvite(invite: Invite): Promise<void> {
     return new Promise((resolve, reject) => {
       const url: string = `${process.env.VUE_APP_API_HOST}/api/admin-invites/${invite.id}`;
@@ -36,7 +36,7 @@ export default class InvitesModule extends VuexModule {
     });
   }
 
-  @Action({ commit: 'inviteRequested' })
+  @Action({ commit: "inviteRequested" })
   public requestInvite(invite: InviteRequest): Promise<void> {
     return new Promise((resolve, reject) => {
       const url: string = `${process.env.VUE_APP_API_HOST}/api/invites`;

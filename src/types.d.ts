@@ -7,11 +7,11 @@ export interface Invite {
   id: number;
   already_requested: boolean;
   approved: boolean;
-  approved_at: Date;
+  approved_at: number;
   email_address: string;
   full_name: string;
   github_username?: string;
-  requested_at: Date;
+  requested_at: number;
 }
 
 export interface InviteRequest {

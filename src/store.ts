@@ -1,9 +1,9 @@
-import axios, { AxiosInstance } from 'axios';
-import Vue from 'vue';
-import Vuex from 'vuex';
+import axios, { AxiosInstance } from "axios";
+import Vue from "vue";
+import Vuex from "vuex";
 
-import AuthModule from './store/auth';
-import InvitesModule from './store/invites';
+import AuthModule from "./store/auth";
+import InvitesModule from "./store/invites";
 
 Vue.use(Vuex);
 
@@ -20,7 +20,7 @@ const store = new Vuex.Store({
   }
 });
 
-store.registerModule('auth', AuthModule);
-store.registerModule('invites', InvitesModule);
+store.registerModule("auth", AuthModule);
+store.registerModule("invites", InvitesModule);
 
 export default store;

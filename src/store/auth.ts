@@ -1,11 +1,11 @@
-import { AxiosResponse } from 'axios';
-import { Action, Module, Mutation, VuexModule  } from 'vuex-module-decorators';
+import { AxiosResponse } from "axios";
+import { Action, Module, Mutation, VuexModule  } from "vuex-module-decorators";
 
-import { Auth } from '../types';
+import { Auth } from "../types";
 
 @Module
 export default class AuthModule extends VuexModule {
-  public authToken: string = '';
+  public authToken: string = "";
 
   get isAuthenticated(): boolean {
     return !!this.authToken && !!this.authToken.length;
@@ -13,13 +13,13 @@ export default class AuthModule extends VuexModule {
 
   @Mutation
   public storeToken(token: string): void {
-    localStorage.setItem('blono_dev_auth_token', token);
+    localStorage.setItem("blono_dev_auth_token", token);
     this.authToken = token;
   }
 
   @Mutation
   public loadAuthToken(): void {
-    const token: string|null = localStorage.getItem('blono_dev_auth_token');
+    const token: string|null = localStorage.getItem("blono_dev_auth_token");
     if (!!token && token.length) {
       this.authToken = token;
     }
