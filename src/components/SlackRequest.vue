@@ -4,7 +4,9 @@
       <p>We've received your request and will send you an invite as soon as we can!</p>
     </div>
     <div v-else>
-      <div v-if="submissionError"><span class="danger">{{ submissionError }}</span></div>
+      <div v-if="submissionError">
+        <span class="danger">{{ submissionError }}</span>
+      </div>
       <form @submit.prevent="onSubmit">
         <div class="field">
           <div class="control">
@@ -53,8 +55,8 @@ export default Vue.extend({
       githubUsername: "" as string,
       isSubmitting: false as boolean,
       submitted: false as boolean,
-      submissionError: null as string|null
-    }
+      submissionError: null as string | null
+    };
   },
 
   computed: {
@@ -88,7 +90,8 @@ export default Vue.extend({
 
     showError(): void {
       this.isSubmitting = false;
-      this.submissionError = "There was an error with your submission. Please fill out all required fields are try again."
+      this.submissionError =
+        "There was an error with your submission. Please fill out all required fields are try again.";
     }
   }
 });
